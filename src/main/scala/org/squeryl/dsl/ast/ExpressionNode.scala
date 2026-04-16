@@ -225,25 +225,25 @@ class TernaryOperatorNode(val first: ExpressionNode, val second: ExpressionNode,
 
 trait LogicalBoolean extends ExpressionNode {
 
-  def and(b: LogicalBoolean): LogicalBoolean =
+  infix def and(b: LogicalBoolean): LogicalBoolean =
     new BinaryOperatorNodeLogicalBoolean(this, b, "and")
 
-  def or(b: LogicalBoolean): LogicalBoolean =
+  infix def or(b: LogicalBoolean): LogicalBoolean =
     new BinaryOperatorNodeLogicalBoolean(this, b, "or")
 
-  def and(b: Option[LogicalBoolean]): LogicalBoolean =
+  infix def and(b: Option[LogicalBoolean]): LogicalBoolean =
     b.map(this and _).getOrElse(this)
 
-  def or(b: Option[LogicalBoolean]): LogicalBoolean =
+  infix def or(b: Option[LogicalBoolean]): LogicalBoolean =
     b.map(this or _).getOrElse(this)
 
 }
 
 object TrueLogicalBoolean extends LogicalBoolean {
 
-  override def and(b: LogicalBoolean): LogicalBoolean = b
+  override infix def and(b: LogicalBoolean): LogicalBoolean = b
 
-  override def or(b: LogicalBoolean): LogicalBoolean = this
+  override infix def or(b: LogicalBoolean): LogicalBoolean = this
 
   override def doWrite(sw: StatementWriter) = {
     sw.write("(1=1)")
@@ -253,9 +253,9 @@ object TrueLogicalBoolean extends LogicalBoolean {
 
 object FalseLogicalBoolean extends LogicalBoolean {
 
-  override def and(b: LogicalBoolean): LogicalBoolean = this
+  override infix def and(b: LogicalBoolean): LogicalBoolean = this
 
-  override def or(b: LogicalBoolean): LogicalBoolean = b
+  override infix def or(b: LogicalBoolean): LogicalBoolean = b
 
   override def doWrite(sw: StatementWriter) = {
     sw.write("(1=0)")
