@@ -57,10 +57,10 @@ trait WhereState[Cond] extends GroupBySignatures with ComputeMeasuresSignaturesF
   def select[R](yieldClosure: => R): SelectState[R] =
     new BaseQueryYield[R](this, () => yieldClosure)
 
-  def set(updateAssignments: UpdateAssignment*)(implicit cond: Cond =:= Conditioned) =
+  infix def set(updateAssignments: UpdateAssignment*)(implicit cond: Cond =:= Conditioned) =
     new UpdateStatement(whereClause, updateAssignments)
 
-  def setAll(updateAssignments: UpdateAssignment*)(implicit cond: Cond =:= Unconditioned) =
+  infix def setAll(updateAssignments: UpdateAssignment*)(implicit cond: Cond =:= Unconditioned) =
     new UpdateStatement(whereClause, updateAssignments)
 }
 

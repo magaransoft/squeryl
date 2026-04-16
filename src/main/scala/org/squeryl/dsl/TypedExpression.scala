@@ -321,22 +321,22 @@ trait TypedExpression[A1, T1] extends ExpressionNode {
   def <>[A2, T2](q: Query[Measures[A2]])(implicit tef: TypedExpressionFactory[A2, T2], ev: CanCompare[T1, T2]) =
     new BinaryOperatorNodeLogicalBoolean(this, q.copy(false, Nil).ast, "<>")
 
-  def gt[A2, T2](b: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
+  infix def gt[A2, T2](b: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
     new BinaryOperatorNodeLogicalBoolean(this, b, ">")
-  def lt[A2, T2](b: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
+  infix def lt[A2, T2](b: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
     new BinaryOperatorNodeLogicalBoolean(this, b, "<")
-  def gte[A2, T2](b: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
+  infix def gte[A2, T2](b: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
     new BinaryOperatorNodeLogicalBoolean(this, b, ">=")
-  def lte[A2, T2](b: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
+  infix def lte[A2, T2](b: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
     new BinaryOperatorNodeLogicalBoolean(this, b, "<=")
 
-  def gt[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
+  infix def gt[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
     new BinaryOperatorNodeLogicalBoolean(this, q.copy(false, Nil).ast, ">")
-  def gte[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
+  infix def gte[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
     new BinaryOperatorNodeLogicalBoolean(this, q.copy(false, Nil).ast, ">=")
-  def lt[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
+  infix def lt[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
     new BinaryOperatorNodeLogicalBoolean(this, q.copy(false, Nil).ast, "<")
-  def lte[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
+  infix def lte[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
     new BinaryOperatorNodeLogicalBoolean(this, q.copy(false, Nil).ast, "<=")
 
   def >[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean = gt(q)
@@ -353,15 +353,15 @@ trait TypedExpression[A1, T1] extends ExpressionNode {
   def isNull = new PostfixOperatorNode("is null", this) with LogicalBoolean
   def isNotNull = new PostfixOperatorNode("is not null", this) with LogicalBoolean
 
-  def between[A2, T2, A3, T3](b1: TypedExpression[A2, T2], b2: TypedExpression[A3, T3])(implicit
+  infix def between[A2, T2, A3, T3](b1: TypedExpression[A2, T2], b2: TypedExpression[A3, T3])(implicit
     ev1: CanCompare[T1, T2],
     ev2: CanCompare[T2, T3]
   ) = new BetweenExpression(this, b1, b2)
 
-  def like[A2, T2 <: TOptionString](s: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
+  infix def like[A2, T2 <: TOptionString](s: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
     new BinaryOperatorNodeLogicalBoolean(this, s, "like")
 
-  def ilike[A2, T2 <: TOptionString](s: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
+  infix def ilike[A2, T2 <: TOptionString](s: TypedExpression[A2, T2])(implicit ev: CanCompare[T1, T2]) =
     new BinaryOperatorNodeLogicalBoolean(this, s, "ilike")
 
   def ||[A2, T2](e: TypedExpression[A2, T2]) = new ConcatOp[A1, A2, T1, T2](this, e)
@@ -375,16 +375,16 @@ trait TypedExpression[A1, T1] extends ExpressionNode {
   def is(columnAttributes: AttributeValidOnNumericalColumn*)(implicit restrictUsageWithinSchema: Schema) =
     new ColumnAttributeAssignment(_fieldMetaData, columnAttributes)
 
-  def in[A2, T2](t: Iterable[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
+  infix def in[A2, T2](t: Iterable[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
     new InclusionOperator(this, new RightHandSideOfIn(new ConstantExpressionNodeList(t, mapper)).toIn)
 
-  def in[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
+  infix def in[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
     new InclusionOperator(this, new RightHandSideOfIn(q.copy(false, Nil).ast))
 
-  def notIn[A2, T2](t: Iterable[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
+  infix def notIn[A2, T2](t: Iterable[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
     new ExclusionOperator(this, new RightHandSideOfIn(new ConstantExpressionNodeList(t, mapper)).toNotIn)
 
-  def notIn[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
+  infix def notIn[A2, T2](q: Query[A2])(implicit cc: CanCompare[T1, T2]): LogicalBoolean =
     new ExclusionOperator(this, new RightHandSideOfIn(q.copy(false, Nil).ast))
 
   def ~ = this
