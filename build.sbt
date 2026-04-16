@@ -55,7 +55,7 @@ val commonSettings = Def.settings(
       "-sourcepath",
       base,
       "-doc-source-url",
-      "https://github.com/squeryl/squeryl/tree/" + hash + "€{FILE_PATH}.scala"
+      "https://github.com/magaransoft/squeryl/tree/" + hash + "€{FILE_PATH}.scala"
     )
   },
   scalacOptions ++= {
