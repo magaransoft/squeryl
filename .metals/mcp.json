@@ -1,0 +1,7 @@
+{
+  "servers": {
+    "squeryl-metals": {
+      "url": "http://localhost:9878/mcp"
+    }
+  }
+}
