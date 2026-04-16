@@ -1,4 +1,4 @@
-# Squeryl
+# Squeryl [![Tests & Docs](https://github.com/magaransoft/squeryl/actions/workflows/ci.yml/badge.svg)](https://github.com/magaransoft/squeryl/actions/workflows/ci.yml)
 
 A Scala 3 ORM and DSL for talking with databases using minimum verbosity and maximum type safety.
 
