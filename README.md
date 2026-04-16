@@ -1,4 +1,4 @@
-# Squeryl [![Tests & Docs](https://github.com/magaransoft/squeryl/actions/workflows/ci.yml/badge.svg)](https://github.com/magaransoft/squeryl/actions/workflows/ci.yml)
+# Squeryl [![Tests & Docs](https://github.com/magaransoft/squeryl/actions/workflows/ci.yml/badge.svg)](https://github.com/magaransoft/squeryl/actions/workflows/ci.yml) [![Maven Central](https://img.shields.io/maven-central/v/com.magaran/squeryl_3)](https://central.sonatype.com/artifact/com.magaran/squeryl_3)
 
 A Scala 3 ORM and DSL for talking with databases using minimum verbosity and maximum type safety.
 
@@ -9,8 +9,10 @@ This is a fork of the original [squeryl/squeryl](https://github.com/squeryl/sque
 Squeryl is published to Maven Central for Scala 3. Add the following to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.magaran" %% "squeryl" % "0.1.0"
+libraryDependencies += "com.magaran" %% "squeryl" % "<version>"
 ```
+
+Replace `<version>` with the latest version from the Maven Central badge above.
 
 ## Changes from upstream
 
@@ -77,4 +79,4 @@ The proxy generation used for field reference linking (originally `cglib-nodep`)
 
 ## License
 
-This project is licensed under the [Apache License 2.0](license.txt).
+This project is licensed under the [Apache License 2.0](LICENSE).
